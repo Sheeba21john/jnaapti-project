@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!--This page is the home page of this application-->
+    <title>
+      <%=title %>
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
+      //script to display alert message
+      window.onload = function() {
+        if ("<%= msg %>" != "") {
+          alert("<%= msg %>");
+        }
+      }
+
+      $(document).ready(function() {
+        $('.deleteContact').on("click", deletee);
+      });
+      
+      //script to delete data directly along with conformation
+      function deletee() {
+
+        var id = $(this).data('id');
+        var ensure = confirm('Are you sure?');
+        if (ensure) {
+          $.ajax({
+              url: '/delete_contact/' + id,
+              type: 'POST'
+            })
+            .done(function() {
+              window.location.href = '/';
+              window.location.reload();
+            });
+        } else return false;
+      }
+
+    </script>
+    <style>
+      #navigation{
+        background-color: #306284!important; 
+        height: 60px; 
+        width: 2000px;
+      }
+      
+      #contacts{
+        padding-left: 20px; 
+        font-size: 33px; 
+        top:25px; 
+        position:absolute; 
+        font-weight: bold;
+      }
+
+      #add_button{
+        width: 130px;
+        font-size: 14px; 
+        top:25px; 
+        position:absolute; 
+        background-color:#306284;
+      }
+
+      #category{
+        font-weight:bold; 
+        font-size: 23px;
+      }
+
+      #container{
+        text-align: justify-all;  
+        position: absolute;
+         left: 150px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <header role="banner">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navigation">
+        <h1>  
+          <div style="float:right;"> <span style="color:white; margin-left:20px; font:40px"> <strong style="font-size: 25px">
+          <!--SyncPlus hyperlinked to go back to index/home page-->  
+          <a href="/" style="color:white; text-decoration: none">SyncPlus</a></strong> </span> 
+          </div>
+        </h1>
+      </nav>
+    </header>
+    <br>
+    <div style="display: inline; position: absolute; top: 69px;">
+      <h2 id="contacts"> Contacts</h2>
+    </div>
+    <div style="position: absolute; top: 140px; padding-left: 20px">
+      <a href="/add"> <input type = "button" class = "btn btn-primary" value = "Add Contacts" id="add_button"> </a>
+    </div> <br><br/>
+    <div style="top:230px; padding-left:20px; position:absolute">
+      <h4>
+       <fieldset>
+        <!--allows user to display contacts from the desired category-->
+        <legend id="category">Category </legend>
+      </h4>
+      <div style="padding-left: 15px">
+        <a href="/friends">Friends</a><br>
+        <a href="/family"> Family</a> <br>
+        <a href="/acquaintance"> Acquaintance </a><br>
+        <a href="/others"> Others</a> <br>
+        </fieldset>
+      </div>
+    </div>
+    <!--Contacts displayed in a tabular format-->
+    <div id="container" class="container">
+      <ul>
+        <table class="table table-hover" style="position: relative; top:20px; ">
+          <thead>
+            <tr>
+              <th>Profile Photo </th>
+              <th> Name </th>
+              <th> Phone number </th>
+              <th> Action
+                <th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!--takes value from the database to display it in the table-->
+              <div>
+                <% for( var i=0; i<result.length; i++ ){ %>
+            </tr>
+            <th scope="row"> <img src="/<%= result[i].name%>.png" height="40" width="40"> </th>
+            <td>
+              <span> <%=result[i].name %> </span>
+            </td>
+            <td>
+              <span> <%= result[i].number %></span>
+            </td>
+            <td>
+              <a href="/update" data-toggle="tooltip" title="Edit"> <i  class = "fa fa-pencil-square-o" aria-hidden = "true"></i>
+              </a>
+              <a data-toggle="tooltip" title="Remove"><i class = "deleteContact fa fa-trash-o" style = "color: red" aria-hidden = "true" data-id = "<%= result[i].name %>" ></i>
+              </a>
+              <br>
+            </td>
+            <% } %>
+              </div>
+              <br><br>
+          </tbody>
+        </table>
+      </ul>
+    </div>
+
+  </body>
+
+</html>

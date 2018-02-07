@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!--This page when rendered, allows user to edit contacts-->
+    <title>Update Contacts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      #edit{
+        background: #306284; 
+        color: white; 
+        height: 65px; 
+        padding-top: 14px; 
+        font-size: 26px;
+      }
+
+      #profile_image{
+        position: absolute; 
+        right: 435px;
+        top: 228px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <fiieldset class="scheduler-border">
+      <center>
+        <legend class="scheduler-border" id="edit">Update Contacts</legend>
+        <form method="POST" action="/update_contact" enctype="multipart/form-data">
+          <label>Name:</label> <input type="text" name="name"> <br> <br>
+          <label>Number:</label> <input type="text" name="number"> <br> <br>
+          <div> <label style="margin-left: -69px;">Category:</label>
+            <select name="category">
+    					<option  value ="friends" >Friends </option>
+    					<option  value = "family">Family </option>
+    					<option  value = "family">Acquaintance</option>
+    					<option  value = "others">Others</option>
+  			   	</select>
+          </div>
+          <br>
+          <div>
+            <label style="margin-left: -210px;"> Profile Picture: </label> <input id="profile_image" type="file" name="file">
+          </div>
+          <br>
+          <input style="margin-top: 15px;" type="submit" value="Update" class="btn btn-primary">
+        </form>
+      </center>
+      </fieldset>
+  </body>
+
+</html>

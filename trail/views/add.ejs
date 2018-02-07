@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <!--This page when rendered, allows user to add contacts-->
+    <title>Add Contacts</title> </div></center>
+    <style>
+      #insert{ 
+        background: #306284;
+        color: white;
+        height: 65px; 
+        padding-top: 14px; 
+        font-size: 26px;
+      }
+
+      #image{
+        position: absolute; 
+        right: 435px; 
+        top: 228px;
+      }
+    </style>
+    </head>   
+
+    <body>
+      <fiieldset class="scheduler-border" >
+        <center> <div style="display: inline;">
+        <legend id="insert" class="scheduler-border">Add Contacts</legend> 
+          <form method = "POST" enctype="multipart/form-data" id="myForm" action="/add_contact">
+              
+            <label>Name:</label> <input type = "text" name = "name"> <br><br/>
+          
+            <label>Number:</label> <input type = "text" name = "number">  <br> <br/>
+            <div>
+              <label style="margin-left: -69px;"> Category:</label>
+              <select name = "category">
+                <option value = "friends">Friends</option> 
+                <option value = "family">Family</option>   
+                <option value = "acquaintance">Acquaintance</option>
+                <option value = "others">Others</option>   
+              </select>    
+            </div><br>
+            <div>
+              <label style="margin-left: -210px;"> Profile Picture:</label> <input id="image" type="file" name="file"> <br>
+            </div>
+            <input style="margin-top: 15px;" type = "submit" value = "Add" class = "btn btn-primary"> 
+          </form>
+        </center> 
+      </fieldset>
+    </body>  
+</html>
+
+
+    
+   
